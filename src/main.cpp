@@ -80,10 +80,6 @@ class $modify(MyMenuLayer, MenuLayer) {
         if (!MenuLayer::init())
             return false;
 
-        if (Mod::get()->getSavedValue<bool>("shown-moved-alert")) return true;
-
-        NodeIDs::provideFor(this);
-
         auto menu = this->getChildByID("right-side-menu");
 
         auto button = CCMenuItemSpriteExtra::create(
@@ -101,4 +97,5 @@ class $modify(MyMenuLayer, MenuLayer) {
         PackSelectPopup::create()->show();
     }
 };
+
 
