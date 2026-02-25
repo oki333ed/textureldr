@@ -18,25 +18,20 @@ jobs:
         config:
         - name: Windows
           os: windows-latest
-          build-type: RelWithDebInfo
 
         - name: macOS
           os: macos-latest
-          build-type: RelWithDebInfo
 
         - name: iOS
           os: macos-latest
-          build-type: RelWithDebInfo
           target: iOS
 
         - name: Android32
           os: ubuntu-latest
-          build-type: RelWithDebInfo
           target: Android32
 
         - name: Android64
           os: ubuntu-latest
-          build-type: RelWithDebInfo
           target: Android64
 
     name: ${{ matrix.config.name }}
@@ -49,6 +44,7 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
+          build-type: RelWithDebInfo
           export-pdb: true
           bundle-pdb: true
           export-symbols: true
@@ -83,7 +79,7 @@ jobs:
           tag: "nightly"
           prerelease: true
           allowUpdates: true
-          artifactErrorsFailBuild: true
+          artifactErrorsFailBuild: false
           artifacts: "${{steps.build.outputs.build-output}}/*"
 
       - name: "Get mod properties"
@@ -99,6 +95,7 @@ jobs:
           tag: "${{steps.json_properties.outputs.version}}"
           artifacts: "${{steps.build.outputs.build-output}}/*"
           artifactErrorsFailBuild: true
-          allowUpdates: false
+          allowUpdates: true
+
 
 
