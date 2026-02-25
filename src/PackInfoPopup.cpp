@@ -26,14 +26,19 @@ protected:
     }
 
 public:
-    static CCLabelBMFont* create(
+    static WackyBypassFont* create(
         const char* text,
         std::filesystem::path const& fnt
     ) {
-        auto label = CCLabelBMFont::create();
-        static_cast<WackyBypassFont*>(label)->setFntFile(fnt); // NOLINT(*-pro-type-static-cast-downcast)
-        label->setString(text);
-        return label;
+        auto label = new WackyBypassFont();
+        if (label && label->init()) {
+            label->autorelease();
+            label->setFntFile(fnt);
+            label->setString(text);
+            return label;
+        }
+        delete label;
+        return nullptr;
     }
 };
 
@@ -154,3 +159,4 @@ PackInfoPopup* PackInfoPopup::create(const std::shared_ptr<Pack>& pack) {
     delete ret;
     return nullptr;
 }
+
