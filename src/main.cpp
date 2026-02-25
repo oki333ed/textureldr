@@ -41,6 +41,7 @@ class $modify(MyOptionsLayer, OptionsLayer) {
     }
 };
 
+
 class $modify(MyVideoOptionsLayer, VideoOptionsLayer) {
     bool init() {
         if (!VideoOptionsLayer::init()) return false;
@@ -73,3 +74,31 @@ class $modify(MyVideoOptionsLayer, VideoOptionsLayer) {
         PackSelectPopup::create()->show();
     }
 };
+
+class $modify(MyMenuLayer, MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init())
+            return false;
+
+        if (Mod::get()->getSavedValue<bool>("shown-moved-alert")) return true;
+
+        NodeIDs::provideFor(this);
+
+        auto menu = this->getChildByID("right-side-menu");
+
+        auto button = CCMenuItemSpriteExtra::create(
+            CCSprite::createWithSpriteFrameName("gj_folderBtn_001.png"),
+            this, menu_selector(MyMenuLayer::onTextureLdr)
+        );
+        button->setID("texture-loader-button"_spr);
+        menu->addChild(button);
+        menu->updateLayout();
+
+        return true;
+    }
+
+    void onTextureLdr(CCObject*) {
+        PackSelectPopup::create()->show();
+    }
+};
+
