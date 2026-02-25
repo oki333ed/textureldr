@@ -43,6 +43,7 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
+          build-config: RelWithDebInfo
           combine: true
           export-pdb: true
           bundle-pdb: true
@@ -95,3 +96,4 @@ jobs:
           artifacts: "${{steps.build.outputs.build-output}}/*"
           artifactErrorsFailBuild: true
           allowUpdates: false
+
