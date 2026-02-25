@@ -68,7 +68,6 @@ bool PackNode::init(
 
     nameButton->setID("pack-name-button");
     nameButton->setContentWidth(nameLabel->getScaledContentWidth());
-    nameButton->setEnabled(false);
     menu->addChild(nameButton);
 
     auto applyArrowSpr = CCSprite::create("dragIcon.png"_spr);
@@ -159,3 +158,4 @@ PackNode* PackNode::create(
     delete ret;
     return nullptr;
 }
+
