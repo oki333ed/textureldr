@@ -43,8 +43,8 @@ jobs:
       - name: Build the mod
         uses: geode-sdk/build-geode-mod@main
         with:
+          build-config: RelWithDebInfo
           combine: true
-          build-type: RelWithDebInfo
           export-pdb: true
           bundle-pdb: true
           export-symbols: true
@@ -79,7 +79,7 @@ jobs:
           tag: "nightly"
           prerelease: true
           allowUpdates: true
-          artifactErrorsFailBuild: false
+          artifactErrorsFailBuild: true
           artifacts: "${{steps.build.outputs.build-output}}/*"
 
       - name: "Get mod properties"
@@ -95,7 +95,4 @@ jobs:
           tag: "${{steps.json_properties.outputs.version}}"
           artifacts: "${{steps.build.outputs.build-output}}/*"
           artifactErrorsFailBuild: true
-          allowUpdates: true
-
-
-
+          allowUpdates: false
