@@ -40,7 +40,9 @@ jobs:
         uses: geode-sdk/build-geode-mod@main
         with:
           combine: true
-          sdk: nightly
+          export-pdb: true
+          bundle-pdb: true
+          export-symbols: true
           target: ${{ matrix.config.target }}
       
   package:
@@ -56,3 +58,4 @@ jobs:
         with:
           name: Build Output
           path: ${{ steps.build.outputs.build-output }}
+
